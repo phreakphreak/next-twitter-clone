@@ -2,8 +2,10 @@ import Image from "next/image";
 import { BiHomeCircle, BiSearch } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineBookmarkBorder, MdOutlineMailOutline } from "react-icons/md";
+import { useModal } from "../hooks";
 import twitterLogo from "../public/twitter.png";
 import { generateUUID } from "../utils";
+import Modal from "./Modal";
 import NavLink from "./NavLink";
 
 const navItems = [
@@ -35,6 +37,12 @@ const navItems = [
 ];
 
 const Header = () => {
+  const [isOpen, toggle] = useModal();
+
+  const handleClick = () => {
+    toggle();
+  };
+
   return (
     <div className="flex flex-row justify-end h-screen text-xl cols-span-1 ">
       <div className="flex flex-col justify-between h-full px-6 py-4 text-white w-[280px] ">
@@ -49,9 +57,13 @@ const Header = () => {
               <NavLink key={generateUUID()} {...item} />
             ))}
           </nav>
-          <button className="w-full h-[50px] mt-8 text-white rounded-full bg-sky-500">
+          <button
+            onClick={handleClick}
+            className="w-full h-[50px] mt-8 text-white rounded-full bg-sky-500"
+          >
             Tweet
           </button>
+          {isOpen && <Modal toggle={toggle} />}
         </div>
         <div className="w-full h-20 ">avatar</div>
       </div>
