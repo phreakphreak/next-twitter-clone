@@ -14,7 +14,7 @@ const TweetButtonHeader = () => {
         Tweet
       </button>
       {isOpen && (
-        <Modal toggle={toggle}>
+        <Modal toggle={toggle} width="min-w-[600px]" height="min-h-[280px]">
           <TweetSection />
         </Modal>
       )}
