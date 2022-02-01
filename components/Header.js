@@ -1,69 +1,15 @@
-import Image from "next/image";
-import { BiHomeCircle, BiSearch } from "react-icons/bi";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdOutlineBookmarkBorder, MdOutlineMailOutline } from "react-icons/md";
-import { useModal } from "../hooks";
-import twitterLogo from "../public/twitter.png";
-import { generateUUID } from "../utils";
-import Modal from "./Modal";
-import NavLink from "./NavLink";
-
-const navItems = [
-  {
-    label: "Home",
-    IconComponent: BiHomeCircle,
-    to: "/home",
-  },
-  {
-    label: "Search",
-    IconComponent: BiSearch,
-    to: "/search",
-  },
-  {
-    label: "Notifications",
-    IconComponent: IoMdNotificationsOutline,
-    to: "/notifications",
-  },
-  {
-    label: "Messages",
-    IconComponent: MdOutlineMailOutline,
-    to: "/messages",
-  },
-  {
-    label: "Bookmarks",
-    IconComponent: MdOutlineBookmarkBorder,
-    to: "/bookmarks",
-  },
-];
+import Navigation from "./Navigation";
+import TwitterLogo from "./TwitterLogo";
+import TweetButtonHeader from "./TweetButtonHeader";
 
 const Header = () => {
-  const [isOpen, toggle] = useModal();
-
-  const handleClick = () => {
-    toggle();
-  };
-
   return (
     <div className="flex flex-row justify-end h-screen text-xl cols-span-1 ">
       <div className="flex flex-col justify-between h-full px-6 py-4 text-white w-[280px] ">
         <div className="w-full h-[600px] ">
-          <div className="mb-4 w-7 h-7">
-            <NavLink to="/">
-              <Image src={twitterLogo} alt="logo" />
-            </NavLink>
-          </div>
-          <nav className="flex flex-col justify-center gap-8 py-4">
-            {navItems.map((item) => (
-              <NavLink key={generateUUID()} {...item} />
-            ))}
-          </nav>
-          <button
-            onClick={handleClick}
-            className="w-full h-[50px] mt-8 text-white rounded-full bg-sky-500"
-          >
-            Tweet
-          </button>
-          {isOpen && <Modal toggle={toggle} />}
+          <TwitterLogo className="mb-4 w-7 h-7" />
+          <Navigation className="flex flex-col justify-center gap-8 py-4" />
+          <TweetButtonHeader />
         </div>
         <div className="w-full h-20 ">avatar</div>
       </div>
